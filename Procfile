@@ -1,1 +1,1 @@
-release:npx prisma generate
+web:npx prisma generate
