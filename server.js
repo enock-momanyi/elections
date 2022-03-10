@@ -2,12 +2,13 @@
 // import pkg from '@prisma/client';
 // import bodyParser from 'body-parser';
 // import bcrt from 'bcryptjs';
+import {PrismaClient} from '@prisma/client';
 const express = require('express');
-const pkg = require('@prisma/client');
+//const pkg = require('@prisma/client');
 const bodyParser = require('body-parser');
 const bcrt = require('bcryptjs'); 
 const app = express();
-const {PrismaClient} = pkg;
+//const {PrismaClient} = pkg;
 const prisma = new PrismaClient();
 const cors = require('cors');
 const cookierParser = require('cookie-parser');
