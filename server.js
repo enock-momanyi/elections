@@ -650,7 +650,8 @@ app.delete('/api/candidate/:id', async (req, res) => {
     }
 })
 
-const server = app.listen(process.env.PORT || 3000, () => {
-    console.log('Server listening on port: ' + server.address().port)
-})
 
+app.use(express.static(__dirname + '/dist/elections'));
+app.use(express.static(__dirname + '/dist/prisma'));
+app.get('/*', function(req,res) {res.sendFile(path.join(__dirname+'/dist/elections/index.html'));});
+app.listen(process.env.PORT || 8080);
