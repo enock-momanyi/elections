@@ -2,7 +2,7 @@
 // import pkg from '@prisma/client';
 // import bodyParser from 'body-parser';
 // import bcrt from 'bcryptjs';
-import {PrismaClient} from '@prisma/client';
+const {PrismaClient} = require('@prisma/client');
 const express = require('express');
 //const pkg = require('@prisma/client');
 const bodyParser = require('body-parser');
