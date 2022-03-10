@@ -1,0 +1,45 @@
+<div *ngIf="counties" class="grid grid-cols-12 bg-purple-50">
+    <div class="col-span-2">
+        <ul class="menu overflow-auto" style="height: 90vh;">
+            <li *ngFor="let county of counties ;let ind=index" (click)="getCons(ind)"
+            ><a>{{county.name}}</a></li>
+        </ul>
+    </div>
+    <div class="col-span-10  overflow-scroll" style="height: 90vh;">
+        <div class="shadow stats w-full">
+            <div class="stat bg-indigo-50">
+                <div class="stat-title"> Governors</div>
+                <div class="stat-value" [routerLink]="['/candidates',county_id]" [state]="{pos:'governors',area:counties[county_id-1].name}">{{governors.length}}</div>
+                <!-- <div class="stat-value link link-primary" [routerLink]="['/candidates',county_id]" 
+                [state]="{pos:'governors'}"
+                >{governors.length}}</div> -->
+            </div>
+            <div class="stat bg-indigo-50">
+                <div class="stat-title"> Senators</div>
+                <div class="stat-value" [routerLink]="['/candidates',county_id]" [state]="{pos:'senators',area:counties[county_id-1].name}">{{senators.length}}</div>
+                <!-- <div class="stat-value link link-primary" [routerLink]="['/candidates',county_id]" 
+                [state]="{pos:'senators'}"
+                >{senators.length}}</div> -->
+            </div>
+            <div class="stat bg-indigo-50">
+                <div class="stat-title"> Women Rep</div>
+                <div class="stat-value" [routerLink]="['/candidates',county_id]" [state]="{pos:'wr',area:counties[county_id-1].name}" >{{wr.length}}</div>
+                <!-- <div class="stat-value link link-primary" [routerLink]="['/candidates',county_id]" 
+                [state]="{pos:'wr'}" 
+                > wr.length</div> -->
+            </div>
+
+        </div>
+        <h2 class="mt-5 ml-5 text-lg">Constituencies</h2>
+        <div class="mt-5 grid grid-cols-2 ">
+            <div class="stat col-span-1 bg-indigo-50" *ngFor="let constituency of cons">
+                <div class="stat-title">
+                    {{constituency.name}}
+                </div>
+                <div class="stat-value link link-primary" [routerLink]="['/candidates',constituency.id]" 
+                [state]="{pos:'mp',area:constituency.name}"
+                >{{getMpCount(constituency.candidates)}}</div>
+            </div>
+        </div>
+    </div>
+</div>

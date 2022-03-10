@@ -1,0 +1,104 @@
+<div>
+<div class="flex justify-center ">
+    <div *ngIf="start" class="card bg-base-100 w-96">
+        <figure><img [src]="imageSrc"  alt="profile photo"></figure>
+        <div class="card-body">
+            <h1> {{candidate?.candidates?.firstname}} {{candidate?.candidates?.lastname}}</h1>
+            <h2>{{candidate?.candidates?.party}}</h2>
+            <h3>{{candidate?.candidates?.position}}  <span *ngIf="candidate?.candidates?.countyId && counties">{{counties[candidate.candidates.countyId - 1].name}}</span></h3>
+            <p>{{candidate?.candidates?.bio}}</p>
+
+        </div>
+        <div class="card-actions">
+            <button class="btn" (click)="edit()">Update Info</button>
+        </div>
+    </div>
+    <div class="grid grid-flow-col gap-10">
+        <div>
+<form  *ngIf="!start" #phot="ngForm" (ngSubmit)="changePhoto(phot)">
+    <input type="file" accept="image/*" name="" id="imgInp" (change)="preview($event)">
+    <img id="blah" *ngIf="updateSrc" [src]="updateSrc" class="h-80 w-80">
+    <button type="submit">update photo</button>
+    </form>
+    </div>
+    <div>
+<form *ngIf="!start" #form="ngForm" (ngSubmit)="updateCandidate()">
+    
+    <div class="form-control">
+        <label for="firstname" class="label "><span class="label-text text-lg">* Firstname</span></label>
+        <input type="text" name="firstname" id="" class="input input-bordered w-80"
+         required [(ngModel)]="candidateCopy.candidates.firstname"  #firstField="ngModel" 
+         [class.border-red-500]="form.submitted && firstField.invalid">         
+    </div>
+    <div class="form-control">
+        <label for="middlename"><span class="label-text text-lg">Middlename</span></label>
+        <input type="text" name="middlename" id="" class="input input-bordered w-80" 
+        [(ngModel)]="candidateCopy.candidates.middlename" #midField="ngModel">
+    </div>
+    <div class="form-control">
+        <label for="lastname"><span class="label-text text-lg">* Lastname</span></label>
+        <input type="text" name="lastname" id="" class="input input-bordered w-80" 
+        required [(ngModel)]="candidateCopy.candidates.lastname" #lastField="ngModel" 
+        [class.border-red-500]="form.submitted && lastField.invalid"> 
+    </div>
+    <div class="form-control">
+        <label for="alias"><span class="label-text text-lg">Alias</span></label>
+        <input type="text" name="alias" id="" class="input input-bordered w-80" 
+        [(ngModel)]="candidateCopy.candidates.alias" #aliasField="ngModel">
+    </div>
+    <div class="form-control">
+        <label for="bio"><span class="label-text test-lg">Bio</span></label>
+        <textarea name="bio" id="bio" [(ngModel)]="candidateCopy.candidates.bio"></textarea>
+    </div>
+    <div class="form-control">
+        <label for="party"><span class="label-text text-lg">* Party</span></label>
+        <input type="text" name="party" id="" class="input input-bordered w-80" 
+        required [(ngModel)]="candidateCopy.candidates.party" #partyField="ngModel" 
+        [class.border-red-500]="form.submitted && partyField.invalid">
+    </div>
+    <div class="form-control">
+        <label for="position"><span class="label-text text-lg">* Position</span></label>
+        <select name="position" class="select select-bordered" required 
+        [(ngModel)]="candidateCopy.candidates.position" #posField="ngModel" 
+        [class.border-red-500]="form.submitted && posField.invalid">
+        <option>PRESIDENT</option>
+            <option>GOVERNOR</option>
+            <option >SENATOR</option>
+            <option>WOMEN REP</option>
+            <option>MP</option>
+    </select>
+    </div>
+    <div class="form-control">
+        <label for="deputy"><span class="label-text text-lg">Deputy</span></label>
+        <input type="text" name="deputy" id="" class="input input-bordered w-80" 
+        [(ngModel)]="candidateCopy.candidates.deputy" #depField="ngModel" 
+        [class.border-red-500]="form.submitted && depField.invalid">
+    </div>
+    <div 
+    [class.hidden]="dep" class="alert alert-info"
+    >You must select a deputy for that position</div>
+    <div class="form-control">
+        <label for="county"><span class="label-text text-lg">* County</span></label>
+        <select name="county" id="county" class="select select-bordered max-w-xs" required 
+        [(ngModel)]="candidateCopy.candidates.countyId" #cField="ngModel" 
+        [class.border-red-500]="form.submitted && cField.invalid">
+        <option  *ngFor="let county of counties; let ind=index" [value]="county.id" (click)="getCons(ind)">
+            {{county.name}}</option>
+        </select>
+    </div>
+    <div class="form-control" >
+        <label for="constituency"><span class="label-text text-lg">* Constituency</span></label>
+        <select name="constituency" id="constituency" class="select select-bordered max-w-xs" required 
+        [(ngModel)]="candidateCopy.candidates.constituencyId" #cosField="ngModel"
+        [class.border-red-500]="form.submitted && cosField.invalid" >
+        <option *ngFor="let consti of cons" [value]="consti.id">{{consti.name}}</option>
+        </select>
+    </div>
+    
+   
+    <button type="submit" class="my-4 btn btn-md">update</button> <button class="my-4 btn btn-md" (click)="edit()">cancel</button>
+</form>
+    </div>
+</div>
+</div>
+</div>

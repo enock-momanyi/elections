@@ -1,0 +1,38 @@
+<div *ngIf="accountDetails" class="grid justify-center">
+  <form #f2="ngForm" (ngSubmit)="update()">
+    <div class="form-control">
+        <label for="username" class="label"><span class="label-text">Username</span></label>
+        <input type="text" name="username" id="" class="input input-bordered w-96" [(ngModel)]="accountDetails.username" #user="ngModel">
+    </div>
+    <div>
+        <label for="email" class="label"><span class="label-text">E-mail</span></label>
+        <input type="email" name="email" id="" class="input input-bordered w-96" [(ngModel)]="accountDetails.email" #mail="ngModel">
+    </div>
+    <button class="btn" [disabled]="mail.untouched && user.untouched">update</button>
+</form>
+<!-- The button to open modal -->
+<label for="my-modal" class="btn modal-button mt-10">update password</label>
+
+<!-- Put this part before </body> tag -->
+<input type="checkbox" id="my-modal" class="modal-toggle">
+<div class="modal">
+  <div class="modal-box">
+      <form #f3="ngForm" (ngSubmit)="passUpdate()">
+          <div class="form-control">
+            <label for="old-pass" class="label">Input your old password</label>
+            <input type="password" name="old" id="old-pass" class="input" [(ngModel)]="password.oldPass">
+          </div>
+          <div class="form-control">
+            <label for="new-pass" class="label">Input your new password</label>
+            <input type="password" name="new" id="new-pass" class="input" [(ngModel)]="password.newPas">
+        </div>
+        <button type="submit">change password</button>
+        <div class="alert-error"></div>
+      </form>
+    <div class="modal-action">
+      <label for="my-modal" class="btn">Yay!</label>
+    </div>
+  </div>
+</div>
+
+</div>

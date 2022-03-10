@@ -1,0 +1,104 @@
+<div class="flex justify-center p-10 bg-purple-50">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" enctype="multipart/form-data">
+        <label class="label"><span class="label-text">Upload Photo</span></label>
+        <div id="upload_avatar" class="flex align-middle border-dashed border-2 border-gray-500 w-32 h-32"
+        (click)="upload()">
+            <input type="file" name="" id="file" class="hidden" (change)="preview($event)">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+    </div>
+        <div class="grid gap-4 grid-cols-12">
+        <div class="form-control col-span-12 md:col-span-6 w-72">
+            <label class="label"><span class="label-text">* Username</span></label>
+            <input type="text" name="username" id="" class="input input-bordered"
+             required [(ngModel)]="userData.username" #userField="ngModel" [class.border-red-500]="form.submitted && userField.invalid">
+             <div [class.hidden]="!form.submitted || userField.valid" class="alert alert-error">
+                username exists</div>
+        </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="firstname" class="label "><span class="label-text">* Firstname</span></label>
+            <input type="text" name="firstname" id="" class="input input-bordered"
+             required [(ngModel)]="userData.firstname" #firstField="ngModel" [class.border-red-500]="form.submitted && firstField.invalid">         
+        </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="middlename"><span class="label-text">Middlename</span></label>
+            <input type="text" name="middlename" id="" class="input input-bordered" [(ngModel)]="userData.middlename" #midField="ngModel">
+        </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="lastname"><span class="label-text">* Lastname</span></label>
+            <input type="text" name="lastname" id="" class="input input-bordered" 
+            required [(ngModel)]="userData.lastname" #lastField="ngModel" [class.border-red-500]="form.submitted && lastField.invalid"> 
+        </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="alias"><span class="label-text">Alias</span></label>
+            <input type="text" name="alias" id="" class="input input-bordered" [(ngModel)]="userData.alias" #aliasField="ngModel">
+        </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="email"><span class="label-text">* E-mail</span></label>
+            <input type="email" name="email" id="" class="input input-bordered" 
+            required [(ngModel)]="userData.email" #emailField="ngModel" [class.border-red-500]="form.submitted && emailField.invalid">
+            <div class="hidden">email exitst/wrong format</div>
+        </div >
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="party"><span class="label-text">* Party</span></label>
+            <input type="text" name="party" id="" class="input input-bordered" 
+            required [(ngModel)]="userData.party" #partyField="ngModel" [class.border-red-500]="form.submitted && partyField.invalid">
+        </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="position"><span class="label-text">* Position</span></label>
+            <select name="position" class="select select-bordered" required [(ngModel)]="userData.position" #posField="ngModel" 
+            [class.border-red-500]="form.submitted && posField.invalid">
+            <option>PRESIDENT</option>
+            <option>GOVERNOR</option>
+            <option >SENATOR</option>
+            <option>WOMEN REP</option>
+            <option>MP</option>
+        </select>
+        </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="deputy"><span class="label-text">Deputy</span></label>
+            <input type="text" name="deputy" id="" class="input input-bordered " 
+            [(ngModel)]="userData.deputy" #depField="ngModel" [class.border-red-500]="form.submitted && depField.invalid">
+            <div 
+        [class.hidden]="dep" class="alert alert-info"
+        >You must select a deputy for that position</div>
+        </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="county"><span class="label-text">* County</span></label>
+            <select name="county" id="county" class="select select-bordered max-w-xs" required [(ngModel)]="userData.countyId" #cField="ngModel" 
+            [class.border-red-500]="form.submitted && cField.invalid">
+                <option  *ngFor="let county of counties; let ind=index" [value]="county.id" (click)="getCons(ind)">
+                    {{county.name}}</option>
+            </select>
+        </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="constituency"><span class="label-text">* Constituency</span></label>
+            <select name="constituency" id="constituency" class="select select-bordered max-w-xs" required [(ngModel)]="userData.constituencyId" #cosField="ngModel"
+            [class.border-red-500]="form.submitted && cosField.invalid">
+                <option *ngFor="let consti of cons | async" [value]="consti.id">{{consti.name}}</option>
+            </select>
+        </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label class="label">
+              <span class="label-text">Message</span>
+            </label> 
+            <textarea name="bio" class="textarea h-24 textarea-bordered" placeholder="message..." [(ngModel)]="userData.bio"></textarea>
+          </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="password"><span class="label-text">* Password</span></label>
+            <input type="password" name="password" id="" class="input input-bordered" 
+            required [(ngModel)]="userData.password" #pas1Field="ngModel" [class.border-red-500]="form.submitted && pas1Field.invalid">
+            <div class="hidden"> Password must contain</div>
+        </div>
+        <div class="form-control col-span-12 md:col-span-6">
+            <label for="password2"><span class="label-text">* Reenter password</span></label>
+            <input type="password" name="password2" id="" class="input input-bordered" 
+            required ngModel #pas2Field="ngModel" [class.border-red-500]="form.submitted && pas2Field.invalid">
+            <div [class.hidden]="!pas2Field.touched || (pas1Field.value === pas2Field.value)" class="alert alert-error">
+                Passwords do not match</div>
+                </div>
+        </div>
+        <button type="submit" class="my-4 btn btn-md">signup</button>
+    </form>
+</div>

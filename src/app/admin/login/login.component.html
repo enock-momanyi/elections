@@ -1,0 +1,15 @@
+<div class="container mx-auto">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)">
+        <div class="form-control">
+            <label for="username" class="label"><span class="label-text-alt">username or email</span></label>
+            <input type="text" name="username" [(ngModel)]='loginData.email' required #userField="ngModel" class="input input-bordered"
+            [class.border-red-500]="form.submitted && userField.invalid">
+        </div>
+        <div class="form-control">
+            <label for="password" class="label"><span class="label-text-alt">password</span></label>
+            <input type="password" name="password" required [(ngModel)]='loginData.password' #pasField="ngModel" class="input input-bordered"
+            [class.border-red-500]="form.submitted && pasField.invalid">
+        </div>
+        <button type="submit" class="my-10 btn btn-primary">login</button>
+    </form>
+</div>

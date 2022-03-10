@@ -1,0 +1,63 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+
+model User{
+  id Int @default(autoincrement()) @id
+  username String @unique
+  email String @unique
+  password String
+  candidates Candidate?
+}
+
+model Candidate{
+  id Int @default(autoincrement()) @id
+  firstname String
+  middlename String?
+  lastname String
+  alias String?
+  bio String?
+  photo String?
+  party String
+  position String
+  deputy String?
+  county County @relation(fields: [countyId], references: [id])
+  countyId Int
+  constituency Constituency @relation(fields: [constituencyId], references: [id])
+  constituencyId Int
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+}
+
+
+model County{
+  id Int @id @default(autoincrement())
+  name String @unique
+  constituency Constituency[]
+  candidates Candidate[]
+}
+
+model Constituency{
+  id Int @id @default(autoincrement())
+  name String @unique
+  county County @relation(fields: [countyId], references: [id], onDelete: Cascade)
+  countyId Int
+  candidates Candidate[]
+}
+
+model Admin{
+  id Int @id @default(autoincrement())
+  email String @unique
+  password String
+}

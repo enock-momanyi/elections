@@ -1,0 +1,26 @@
+<div>
+    <button (click)="logout()">Logout</button>
+    <table *ngIf="cand && cand.length" class="table">
+        <thead class="thead">
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Position</th>
+            <th>County</th>
+            <th>Constituency</th>
+            <th>Party</th>
+        </thead>
+        <tbody class="tbody">
+            <tr *ngFor="let c of cand;let i=index">
+                <td>{{c.firstname}}</td>
+                <td>{{c.lastname}}</td>
+                <td>{{c.position}}</td>
+                <td>{{c.countyId}}</td>
+                <td>{{c.constituencyId}}</td>
+                <td>{{c.party}}</td>
+                <td>
+                    <button class="btn btn-accent" (click)="deleteCandidate(c.userId,i)">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
