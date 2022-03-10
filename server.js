@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(cookierParser())
 app.use(cors({
     credentials:true,
-    origin:['http://localhost:4200']
+    origin:['electionske.herokuapp.com']
 }))
 // app.use(router);
 // app.post('/addCounties', async (req, res) => {
