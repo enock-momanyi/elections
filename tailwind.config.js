@@ -3,7 +3,8 @@ module.exports = {
     "./src/**/*.{html,ts}"
   ],
   purge: {
-    enabled:true
+    enabled:true,
+    content: ['./src/**/*.html', './src/**/*.ts'],
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
