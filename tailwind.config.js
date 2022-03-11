@@ -10,5 +10,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'),...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})]
 }
