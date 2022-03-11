@@ -2,7 +2,9 @@ module.exports = {
   content :[
     "./src/**/*.{html,ts}"
   ],
-  purge: [],
+  purge: {
+    enabled:true
+  },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
@@ -10,5 +12,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require('daisyui'),...(process.env.NODE_ENV === 'production' ? { cssnano: {} } : {})]
+  plugins: [require('daisyui')]
 }
