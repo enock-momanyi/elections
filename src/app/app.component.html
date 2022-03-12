@@ -1,43 +1,58 @@
-<div class="navbar bg-purple-50  h-1/5 w-screen">
-      <div class=""><span>Canditate's Portal</span></div>
-      <!-- <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
-      </svg> -->
-      <div class="flex-1 px-2 mx-2">
-          <div tabindex="0" class="items-stretch hidden md:flex">
-            <div tabindex="0" class="flex-none hidden"><svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7"/>
-            </svg></div>
-            <a href="/" class="btn btn-ghost btn-sm rounded-btn">
-                    Home
-                  </a> 
-            <a routerLink="/president" class="btn btn-ghost btn-sm rounded-btn">
-                    President
-                  </a> 
-            <a routerLink="/county" class="btn btn-ghost btn-sm rounded-btn">
-                    Candidates
-                  </a> 
-          </div>
-        </div>
-        <div *ngIf="!is_loggedin">
-            <div class="flex-none">
-              <a routerLink="/login" class="btn btn-primary">Login</a>
+<div class="navbar w-screen">
+      <div class="flex px-2"><span class="text-2xl font-semibold"><a href="/">Canditate Portal</a></span></div>
+
+
+          <div class="hidden items-stretch md:flex md:flex-auto">
+
+              <a href="/" class="btn btn-ghost rounded-btn">
+                      Home
+                    </a> 
+              <a routerLink="/president" class="btn btn-ghost rounded-btn">
+                      President
+                    </a> 
+              <a routerLink="/county" class="btn btn-ghost rounded-btn">
+                      Candidates
+                    </a> 
+        <div *ngIf="!is_loggedin" class="flex flex-1 justify-end">
+            <div class="">
+              <a routerLink="/login" class="btn bg-blue-400 border-none">Login</a>
             </div>
-            <div class="flex-none ml-3">
-              <a routerLink="/signup" class="btn btn-accent">Signup</a>
+            <div class="ml-3">
+              <a routerLink="/signup" class="btn bg-pink-400 border-none">Signup</a>
             </div>
         </div>
-        <div *ngIf="is_loggedin">
-          <div class="flex-none">
+        <div *ngIf="is_loggedin" class="flex flex-1 items-stretch justify-end">
+          <div class="">
             <a routerLink="/user">profile</a>
           </div>
-          <div class="flex-none">
+          <div class="ml-3">
             <a routerLink="/account">account</a>
           </div>
-          <div class="flex-none">
-            <a class="btn btn-primary" (click)="logout()">Logout</a>
+          <div class="ml-3">
+            <a class="btn bg-blue-400 border-none" (click)="logout()">Logout</a>
           </div>
         </div>
+        </div>
+        <div class="md:hidden flex flex-1 items-stretch justify-end">
+          <div class=" dropdown dropdown-end bg-base-200">
+            <label tabindex="0" class="btn btn-ghost rounded-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+              </svg>
+            </label>
+            <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4 font-semibold">
+              <li><a href="/">Home</a></li> 
+              <li><a routerLink="/president">President</a></li>
+              <li><a routerLink="/county">Candidates</a></li>
+              <li *ngIf="!is_loggedin"><a routerLink="/login" class="bg-blue-300">Login</a></li>
+              <li *ngIf="!is_loggedin"><a routerLink="/signup" class="mt-3 bg-pink-300">Signup</a></li>
+              <li *ngIf="is_loggedin"><a routerLink="/user">Profile</a></li>
+              <li *ngIf="is_loggedin"><a routerLink="/account">Account</a></li>
+              <li *ngIf="is_loggedin"><a class="btn bg-blue-400 border-none" (click)="logout()">Logout</a></li>
+            </ul>
+          </div>
+        </div>
+
   </div>
   <div class="w-screen"><router-outlet></router-outlet></div>
 
