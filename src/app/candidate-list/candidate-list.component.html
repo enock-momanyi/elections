@@ -1,9 +1,9 @@
-<div class="h-screen w-screen bg-purple-50">
+<div class="h-screen w-screen bg-base-100">
     <div>
         <p>{{pos}} : {{area}}</p>
     </div>
     <div class="grid grid-cols-12" *ngIf="candidates">
-        <div *ngFor="let candidate of candidates" class="card col-span-4 m-5 bg-indigo-50 shadow-xl">
+        <div *ngFor="let candidate of candidates" class="card col-span-12 md:col-span-6 lg:col-span-4 m-5 bg-indigo-50 shadow-xl">
             <div class="avatar">
                 <div class="w-72 rounded-xl">
                     <img [src]='candidate.photo'>
